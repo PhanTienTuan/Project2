@@ -1,0 +1,50 @@
+﻿@model phantientuan_2110900045.Models.NguoiDung
+
+@{
+    ViewData["Title"] = "Register";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../LayoutAccess/css/reset.css">
+    <link rel="stylesheet" href="../../LayoutAccess/css/app.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+    <title>E-Shop</title>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="form-login">
+            <h1 class="form-heading">Form đăng ký</h1>
+            <p style="color:#f5f5f5">@TempData["Message"]</p>
+            <form method="post" asp-action="Register">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <i class="far fa-user"></i>
+                    <input asp-for="Usename" class="form-input" class="form-control" placeholder="Tên đăng nhập" />
+                    <span asp-validation-for="Usename" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <i class="fas fa-key"></i>
+                    <input asp-for="Password" class="form-input" class="form-control" placeholder="Mật khẩu" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <i class="fas fa-key"></i>
+                    <input class="form-input" type="password" name="confirmPassword" class="form-control" placeholder="Xác nhận mật khẩu" />
+                </div>
+                <button class="form-submit" class="btn btn-primary" type="submit">Đăng ký</button>
+
+                <button class="form-submit">
+                    <a style="color:#f5f5f5; text-decoration: none;" asp-action="Login">Đăng nhập</a>
+                </button>
+            </form>
+        </div>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="../../LayoutAccess/js/app.js"></script>
+</html>

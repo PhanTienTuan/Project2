@@ -1,0 +1,37 @@
+﻿@model phantientuan_2110900045.Models.Ncc
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "ThemNcc";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>Thêm nhà cung cấp</h1>
+
+<h4>Nhà cung cấp</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" asp-action="ThemNcc">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MaNcc" class="control-label">Mã nhà cung cấp</label>
+                <input asp-for="MaNcc" class="form-control" />
+                <span asp-validation-for="MaNcc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TenNcc" class="control-label">Tên nhà cung cấp</label>
+                <input asp-for="TenNcc" class="form-control" />
+                <span asp-validation-for="TenNcc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="DanhSachNCC">Quay trở lại</a>
+</div>
+

@@ -1,0 +1,39 @@
+﻿@using X.PagedList.Mvc.Core;
+@using phantientuan_2110900045.Models;
+@model X.PagedList.IPagedList<Hdban>
+@{
+    ViewData["Title"] = "DanhSachHoaDon";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th class="border-top-0">Mã hóa đơn</th>
+            <th class="border-top-0">Mã khách hàng</th>
+            <th class="border-top-0">Ngày bán</th>
+            <th class="border-top-0">Tổng tiền</th>
+            <th class="border-top-0">Địa chỉ nhận hàng</th>
+            <th class="border-top-0">Số điện thoại nhận</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+            <tr>
+            <tr>
+                <th>@item.MaHd</th>
+                <th>@item.MaKh</th>
+                <th>@item.NgayBan</th>
+                <th>@item.TongTien</th>
+                <th class="txt-oflo">@item.DiaChiNhanHang</th>
+                <th class="text-success">@item.SdtnhanHang</th>
+            </tr>
+        </tr>
+}
+    </tbody>
+</table>
+<html>
+<head>
+    <link rel="stylesheet" href="~/LayoutWeb/css/pagination-container.css" asp-append-version="true" />
+</head>
+<div class="pagination-container">@Html.PagedListPager(Model, Page=>Url.Action("DanhSachHoaDon",new{page=Page}))</div>
+</html>

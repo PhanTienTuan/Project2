@@ -1,0 +1,23 @@
+﻿ @{
+	ViewData["Title"] = "Home Page";
+	Layout = "~/Views/Shared/LayoutWeb.cshtml";
+}
+
+@using X.PagedList.Mvc.Core;
+@model X.PagedList.IPagedList<SanPham>
+
+@foreach (var item in Model)
+{
+	<div class="col-xl-3 col-lg-4 col-md-4 col-12">
+		<div class="single-product">
+			@await Html.PartialAsync("PartialSanPham", item)
+		</div>
+	</div>
+}
+<html>
+<head>
+	<link rel="stylesheet" href="~/LayoutWeb/css/pagination-container.css" asp-append-version="true" />
+</head>
+<div class="pagination-container">@Html.PagedListPager(Model, Page=>Url.Action("SanPhamTheoLoai",new{page=Page, maloai=ViewBag.MaLoai}))</div>
+</html>
+

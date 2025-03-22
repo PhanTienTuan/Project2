@@ -1,0 +1,78 @@
+﻿@{
+    Layout = "~/Views/Shared/LayoutWeb2.cshtml";
+    
+    // Khởi tạo biến để tích lũy tổng tiền
+    int totalAmount = 0;
+}
+<p>@TempData["Message"]</p>
+<div class="shopping-cart section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <table class="table shopping-summery">
+                    <thead>
+                        <tr>
+                            <th>Ảnh Sản Phẩm</th>
+                            <th>Tên Sản Phẩm</th>
+                            <th>Giá Sản Phẩm</th>
+                            <th>Số Lượng Bán</th>
+                            <th>Tổng Tiền</th>
+                            <th class="text-center"><i class="ti-trash remove-icon"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model){
+                            <tr>
+                                <td><img src="@Url.Content("../Img/"+item.AnhSp)" alt="Ảnh Sản Phẩm" /></td>
+                                <td>@item.TenSp</td>
+                                <td>@item.GiaSp</td>
+                                <td>
+                                    <a href="@Url.Action("DecreaseQuantity", "Cart", new { maSp = item.MaSp })">-</a>
+                                    @item.SoLuongBan
+                                    <a href="@Url.Action("IncreaseQuantity", "Cart", new { maSp = @item.MaSp })">+</a>
+                                </td>
+                                <td>@(item.GiaSp * item.SoLuongBan)</td>
+                                <td class="action" data-title="Remove"><a href="@Url.Action("RemoveFromCart", "Cart", new { maSp = item.MaSp })"><i class="ti-trash remove-icon"></i></a></td>
+                            </tr>
+                            
+                            totalAmount += item.GiaSp * item.SoLuongBan;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="total-amount">
+                <div class="row">
+                    <div class="col-lg-8 col-md-5 col-12">
+                        <div class="left">
+                            <div class="coupon">
+                                <form method="post" action="@Url.Action("Checkout", "Cart")">
+                                    <input type="hidden" id="TotalAmount" name="TotalAmount" value="@totalAmount" />
+                                    <input type="text" name="DiaChiNhanHang" placeholder="Địa chỉ nhận hàng" required>
+                                    <input type="text" name="SoDienThoai" placeholder="Số điện thoại khách hàng" required>
+                                    <button type="submit" class="btn">Thanh toán</button>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-7 col-12">
+                        <div class="right">
+                            <ul>
+                                <li>Tổng tiền giỏ hàng:<span>@totalAmount.ToString("C")</span></li>
+                                <li>Vận chuyển<span>Miễn phí</span></li>
+                                <li class="last">Số tiền phải trả:<span>@totalAmount.ToString("C")</span></li>
+                            </ul>
+                            <div class="button5">
+                                <a asp-controller="PageSanPham" asp-action="SanPhamIndex" class="btn">Tiếp tục mua</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

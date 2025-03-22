@@ -1,0 +1,47 @@
+﻿@using X.PagedList.Mvc.Core;
+@using phantientuan_2110900045.Models;
+@model X.PagedList.IPagedList<Nsx>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "DanhSachNSX";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>Danh sách nhà sản xuất</h1>
+
+<h4>
+    <a asp-action="ThemNSX">Thêm nhà sản xuất mới</a>
+</h4>
+<p>@TempData["Message"]</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th class="border-top-0">
+                Mã nhà sản xuất
+            </th>
+            <th class="border-top-0">
+                Tên nhà sản xuất
+            </th>
+            <th>Tùy chỉnh</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                <th>@item.MaNsx</th>
+                <th class ="txt-oflo">@item.TenNsx</th>
+                <th>
+                    <a asp-action="SuaNSX" asp-route-MaNsx="@item.MaNsx">Sửa</a> |
+                    <a asp-action="XoaNSX" asp-route-MaNsx="@item.MaNsx">Xóa</a>
+                </th>
+        </tr>
+}
+    </tbody>
+</table>
+<html>
+<head>
+    <link rel="stylesheet" href="~/LayoutWeb/css/pagination-container.css" asp-append-version="true" />
+</head>
+<div class="pagination-container">@Html.PagedListPager(Model, Page=>Url.Action("DanhSachNSX",new{page=Page}))</div>
+</html>

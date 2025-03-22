@@ -1,0 +1,47 @@
+﻿@using X.PagedList.Mvc.Core;
+@using phantientuan_2110900045.Models;
+@model X.PagedList.IPagedList<SanPham>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "DanhMucSanPham";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h1>Danh mục các sản phẩm</h1>
+<h4>
+    <a asp-action="ThemSanPhamMoi">Thêm sản phẩm mới</a>
+</h4>
+<p>@TempData["Message"]</p>
+<div class="table-responsive">
+    <table class="table no-wrap">
+        <thead>
+            <tr>
+                <th class="border-top-0">Mã sản phẩm</th>
+                <th class="border-top-0">Tên sản phẩm</th>
+                <th class="border-top-0">Số lượng sản phẩm</th>
+                <th class="border-top-0">Giá</th>
+                <th>Tùy chỉnh</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th>@item.MaSp</th>
+                    <th class="txt-oflo">@item.TenSp</th>
+                    <th>@item.SoLuongSp</th>
+                    <th><span class="text-success">$@item.GiaSp</span></th>
+                    <th>
+                        <a asp-action="SuaSanPham" asp-route-MaSp="@item.MaSp">Sửa</a> |
+                        <a asp-action="XoaSanPham" asp-route-MaSp="@item.MaSp">Xóa</a>
+                    </th>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<html>
+<head>
+    <link rel="stylesheet" href="~/LayoutWeb/css/pagination-container.css" asp-append-version="true" />
+</head>
+<div class="pagination-container">@Html.PagedListPager(Model, Page=>Url.Action("DanhMucSanPham",new{page=Page}))</div>
+</html>

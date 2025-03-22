@@ -1,0 +1,44 @@
+﻿@using X.PagedList.Mvc.Core;
+@using phantientuan_2110900045.Models;
+@model X.PagedList.IPagedList<KhachHang>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "DanhSachKhachHang";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>Danh sách khách hàng</h1>
+<div class="table-responsive">
+    <table class="table no-wrap">
+        <thead>
+            <tr>
+                <th class="border-top-0">Mã khách hàng</th>
+                <th class="border-top-0">Tài khoản khách hàng</th>
+                <th class="border-top-0">Tên khách hàng</th>
+                <th class="border-top-0">Địa chỉ</th>
+                <th class="border-top-0">Điện thoại</th>
+                <th class="border-top-0">Gmail</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th>@item.MaKh</th>
+                    <th>@item.Username</th>
+                    <th class="txt-oflo">@item.TenKh</th>
+                    <th>@item.DiaChi</th>
+                    <th class="text-success">@item.DienThoai</th>
+                    <th>@item.Gmail</th>
+                </tr>
+            }</
+        </tbody>
+    </table>
+</div>
+<html>
+<head>
+    <link rel="stylesheet" href="~/LayoutWeb/css/pagination-container.css" asp-append-version="true" />
+</head>
+<div class="pagination-container">@Html.PagedListPager(Model, Page=>Url.Action("DanhSachKhachHang",new{page=Page}))</div>
+</html>

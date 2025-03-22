@@ -1,0 +1,60 @@
+﻿@using X.PagedList.Mvc.Core;
+@using phantientuan_2110900045.Models;
+@model X.PagedList.IPagedList<NhanVien>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "DanhSachNhanVien";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+
+}
+
+<h1>DanhSachNhanVien</h1>
+
+<h4>
+    <a asp-action="ThemNhanVien">Thêm nhân viên</a>
+</h4>
+<p>@TempData["Message"]</p>
+
+<div class="table-responsive">
+    <table class="table no-wrap">
+        <thead>
+            <tr>
+                <th class="border-top-0">Mã nhân viên</th>
+                <th class="border-top-0">Tài khoản nhân viên</th>
+                <th class="border-top-0">Tên nhân viên</th>
+                <th class="border-top-0">Ngày sinh</th>
+                <th class="border-top-0">Số điện thoại 1</th>
+                <th class="border-top-0">Số điện thoại 1</th>
+                <th class="border-top-0">Địa chỉ</th>
+                <th class="border-top-0">Chức vụ</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th>@item.MaNv</th>
+                    <th>@item.Username</th>
+                    <th class="txt-oflo">@item.TenNhanVien</th>
+                    <th>@item.NgaySinh</th>
+                    <th class="text-success">@item.SoDienThoai1</th>
+                    <th class="text-success">@item.SoDienThoai2</th>
+                    <th>@item.DiaChi</th>
+                    <th>@item.ChucVu</th>
+                    <th>
+                        <a asp-action="SuaNhanVien" asp-route-MaNv="@item.MaNv">Sửa</a> |
+                        <a asp-action="XoaNhanVien" asp-route-MaNv="@item.MaNv">Xóa</a>
+                    </th>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<html>
+<head>
+    <link rel="stylesheet" href="~/LayoutWeb/css/pagination-container.css" asp-append-version="true" />
+</head>
+<div class="pagination-container">@Html.PagedListPager(Model, Page=>Url.Action("DanhSachNhanVien",new{page=Page}))</div>
+</html>
+

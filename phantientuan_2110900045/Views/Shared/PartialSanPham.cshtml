@@ -1,0 +1,27 @@
+﻿@model SanPham
+
+		<div class="product-img">
+			<a href="product-details.html">
+				<img class="default-img" src="@Url.Content("../Img/"+Model.AnhSp)" alt="#">
+				<img class="hover-img" src="@Url.Content("../Img/"+Model.AnhSp)" alt="#">
+			</a>
+			<div class="button-head">
+				<div class="product-action">
+					<a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" ti-eye"></i><span>Xem sản phẩm</span></a>
+					<a title="Wishlist" href="#">
+						<i class=" ti-heart "></i><span>
+							Thêm vào mục yêu thích
+						</span>
+					</a>
+				</div>
+				<div class="product-action-2">
+			<a href="@Url.Action("AddToCart", "Cart", new { maSp = Model.MaSp, Soluong = 1 })">Thêm vào giỏ hàng</a>
+		</div>
+			</div>
+		</div>
+		<div class="product-content">
+			<h3><a>@Model.TenSp</a></h3>
+			<div class="product-price">
+				<span>$@Model.GiaSp</span>
+			</div>
+		</div>

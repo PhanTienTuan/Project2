@@ -1,0 +1,6 @@
+﻿@model IEnumerable<LoaiSp>
+
+@foreach (var item in Model)
+{
+        <li><a asp-action="SanPhamTheoLoai" asp-route-MaLoai="@item.MaLoai">@item.LoaiSp1</a></li>
+}
